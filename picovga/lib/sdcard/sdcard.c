@@ -176,6 +176,7 @@ void init_spi(void)
 				SDCARD_PIN_SPI0_MOSI,
 				SDCARD_PIN_SPI0_MISO
 	);
+	printf("SDCARD.C: pio_spi_init executed\n");
 #endif
 }
 

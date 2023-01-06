@@ -20,9 +20,9 @@ pico_enable_stdio_usb(picovga 1)
 pico_enable_stdio_uart(picovga 1)
 
 set(SD_CS "22" CACHE STRING "Specify the Chip Select GPIO pin for the SD card")
-set(SD_SCK "18" CACHE STRING "Specify the Clock GPIO pin for the SD card")
-set(SD_MOSI "19" CACHE STRING "Select the Master Out Slave In GPIO pin for the SD card")
-set(SD_MISO "20" CACHE STRING "Select the Master In Slave Out GPIO pin for the SD card")
+set(SD_SCK "5" CACHE STRING "Specify the Clock GPIO pin for the SD card")
+set(SD_MOSI "18" CACHE STRING "Select the Master Out Slave In GPIO pin for the SD card")
+set(SD_MISO "19" CACHE STRING "Select the Master In Slave Out GPIO pin for the SD card")
 
 target_compile_definitions(picovga PRIVATE
 	SDCARD_PIN_SPI0_CS=${SD_CS}

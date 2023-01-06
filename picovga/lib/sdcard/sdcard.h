@@ -13,15 +13,15 @@
 #endif
 
 #ifndef SDCARD_PIN_SPI0_SCK
-#define SDCARD_PIN_SPI0_SCK    18
+#define SDCARD_PIN_SPI0_SCK    5
 #endif
 
 #ifndef SDCARD_PIN_SPI0_MOSI
-#define SDCARD_PIN_SPI0_MOSI   19
+#define SDCARD_PIN_SPI0_MOSI   18
 #endif
 
 #ifndef SDCARD_PIN_SPI0_MISO 
-#define SDCARD_PIN_SPI0_MISO   20
+#define SDCARD_PIN_SPI0_MISO   19
 #endif
 
 #endif // _SDCARD_H_
