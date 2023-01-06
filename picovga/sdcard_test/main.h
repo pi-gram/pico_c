@@ -8,6 +8,7 @@
 #include "stdio.h"
 #include "ff.h"
 #include "sdcard.h"
+#include <string.h>
 
 #define UBYTE   uint8_t
 #define UWORD   uint16_t
@@ -22,6 +23,8 @@
 #define SDCARD_PIO		pio1
 #define SDCARD_PIO_SM		0
 
+void PrintDirFiles(void);
+uint32_t Storage_DirFileList(const char* DirName);
 uint8_t system_init(void);
 int sdcard_test(void);
 

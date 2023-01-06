@@ -5,7 +5,7 @@
 
 /* Pico Wireless */
 #ifndef SDCARD_SPI_BUS
-#define SDCARD_SPI_BUS spi0
+#define SDCARD_SPI_BUS spi1
 #endif
 
 #ifndef SDCARD_PIN_SPI0_CS

@@ -4,11 +4,16 @@ uint8_t counter = 0;
 bool sdcard_success = false;
 const uint LED_PIN = PICO_DEFAULT_LED_PIN;
 static FATFS fs;
+FILINFO MyFileInfo;
+DIR MyDirectory;
+FIL MyFile;
+
+static TCHAR str[40];
 
 bool initSDCard()
 {
+
     FRESULT fr;
-    TCHAR str[40];
     sleep_ms(1000);
 
     printf("SDCARD_TEST.C: Let's try to mount the SDcard\n");
@@ -25,24 +30,49 @@ bool initSDCard()
     }
     printf("SDCARD_TEST.C: Mounted OKAY!\n");
     
-    fr = f_chdir("/");
-    if (fr != FR_OK)
-    {
-        printf("SDCARD_TEST.C: Cannot change dir to / : %d\n", fr);
-        return false;
-    }
-    // for f_getcwd to work, set
-    //   #define FF_FS_RPATH		2
-    // in drivers/fatfs/ffconf.h
-    fr = f_getcwd(str, sizeof(str));
-    if (fr != FR_OK)
-    {
-        printf("SDCARD_TEST.C: Cannot get current dir: %d\n", fr);
-        return false;
-    }
-    printf("SDCARD_TEST.C: Current directory is: %s\n", str);
-
     return true;
+}
+
+void PrintDirFiles(void)
+{
+    uint32_t numFiles = 0x00;
+    numFiles = Storage_DirFileList("/");
+    printf("successfully listed files in the root folder:%d\n",numFiles);
+    if(numFiles>1) {
+        numFiles = Storage_DirFileList("/800");
+        printf("successfully listed files in the /800 folder:%d\n",numFiles);    
+    }
+    fflush(stdout);
+}
+
+uint32_t Storage_DirFileList(const char* DirName)
+{
+    uint32_t i = 0, j = 0;
+    FRESULT res;
+    sleep_ms(1000);
+    
+    printf("The DirName to look through is: %s\n", DirName);
+
+    res = f_opendir(&MyDirectory, DirName);
+    if(res == FR_OK){
+        i = strlen(DirName);
+	for (;;){
+	    res = f_readdir(&MyDirectory, &MyFileInfo);
+	    if(res != FR_OK || MyFileInfo.fname[0] == 0) break;
+            if(MyFileInfo.fname[0] == '.') continue;
+	    if(!(MyFileInfo.fattrib & AM_DIR)){
+	        do{
+		    i++;
+		}while (MyFileInfo.fname[i] != 0x2E);
+		if(j < 255){ //just limit it to 255
+		     printf("%s\n",MyFileInfo.fname);
+		     j++;
+		}
+	    }
+	    i = 0;
+        }
+    }
+    return j;
 }
 
 
@@ -87,6 +117,10 @@ int sdcard_test(void)
         printf("SDCARD_TEST.C: Woo!hoo! party time\n");
     }
 
+    if(sdcard_success) {
+        PrintDirFiles();
+    }
+    
     //flash 3 times 3 seconds gap
     gpio_put(LED_PIN, 1);
     sleep_ms(1000);
@@ -107,21 +141,38 @@ int sdcard_test(void)
 DEBUG OUTPUT:
 
 SDCARD_TEST.C: system init response=0
-SDCARD_TEST.C: SDCARD_SPI_BUS=1073987584
+SDCARD_TEST.C: SDCARD_SPI_BUS=1074003968
 SDCARD_TEST.C: SDCARD_PIN_SPI0_CS=22
-SDCARD_TEST.C: SDCARD_PIN_SPI0_SCK=18
-SDCARD_TEST.C: SDCARD_PIN_SPI0_MOSI=19
-SDCARD_TEST.C: SDCARD_PIN_SPI0_MISO=20
-SDCARD_TEST.C: SDCARD_PIO=1344274432
+SDCARD_TEST.C: SDCARD_PIN_SPI0_SCK=5
+SDCARD_TEST.C: SDCARD_PIN_SPI0_MOSI=18
+SDCARD_TEST.C: SDCARD_PIN_SPI0_MISO=19
+SDCARD_TEST.C: SDCARD_PIO=1345323008
 SDCARD_TEST.C: SDCARD_PIO_SM=0
 SDCARD_TEST.C: Let's try to mount the SDcard
 FF.C: inside f_mount about to call mount_volume
 FF.C: about to call disk_initialize from within mount_volume
 SDCARD.C: about to call init_spi() here, I think I was called by FF.C: mount_volume
 SDCARD.C: we should be executing the PIO code here
-SDCARD_TEST.C: SD card mount error: 3
-SDCARD_TEST.C: sdcard_success=0
-SDCARD_TEST.C: Bugger an error happened...again..
+SDCARD.C: pio_spi_init executed
+SDCARD_TEST.C: Mounted OKAY!
+SDCARD_TEST.C: sdcard_success=1
+SDCARD_TEST.C: Woo!hoo! party time
+The DirName to look through is: /
+flower.bmp
+test.txt
+cal.cfg
+successfully listed files in the root folder:3
+The DirName to look through is: /800
+3-D Tic-Tac-Toe.rom
+Abracadabra.rom
+Alf in the Color Caves.rom
+Alien Ambush.rom
+Alien Garden.rom
+ataribas.rom
+atariosb.rom
+atarixl.rom
+successfully listed files in the /800 folder:8
+
 */
 
 }
