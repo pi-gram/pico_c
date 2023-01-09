@@ -6,6 +6,8 @@ I extracted out the core of what I was looking for in an attempt to understand t
 
 Whilst I do have the VGA output working...ish... the colours are all out of whack! It's a bit like watching Stranger Things... basically there is a LOT of RED.  I'm pretty sure that it is because I am using the PICO DEMO VGA Board that uses 5 pins for RED, then 5 for GREEN and then 5 for BLUE - whereas the original setup for MCUME was just 2 for BLUE, 3 for GREEN and 3 for RED - I've left the schematic in a folder.  I'll examine the codebase next to see how this was setup
 
+![Shape](https://github.com/pi-gram/pico_c/blob/main/MCUME_pico_picodemo_VGA/screenshots/IMG_20230109_195208.jpg)
+
 The DEBUG output (before the _Step() looping) outputs a nice flow of how the code is executing, so you can follow through and trace what is being called and where.
 
 Apart from the screen being mostly in RED.  The only other drawback in this version is the lack of BUTTONS.  I need to add in the usage of Button A, B and C.  But as usual (like the SDCard), it's not straight forward so will take me a bit of time to add them in and even when I do, it'll be limited to LEFT, RIGHT and FIRE... so maybe not all that useful?  Well, it will be for the likes of 'Alien Ambush', so I will be looking at somehow getting the UART from GPIO 20/21 to be used and add a keyboard matrix board (that I just happen to have) or a 5 button analog LEFT, RIGHT, UP, DOWN and FIRE external board that I've got.  We'll see.
@@ -13,6 +15,7 @@ Apart from the screen being mostly in RED.  The only other drawback in this vers
 
 A pre-built .uf2 file is included currently within the build folder.  It does require an /800/Alien Ambush.rom file to be on the sdcard.  I'm obviously not distributing any .rom files (for obvious reasons) but you can obtain them easily enough online.
 
+![Shape](https://github.com/pi-gram/pico_c/blob/main/MCUME_pico_picodemo_VGA/screenshots/IMG_20230109_195217.jpg)
 
 To use, open a Terminator window and split horizontally
 [1]
@@ -29,4 +32,6 @@ It will auto disconnect and then reconnect and you will see the DEBUG output in 
 
 
 I'll add an image or even a video to show it in the current working state shortly and include it below:
+
+![Shape](https://github.com/pi-gram/pico_c/blob/main/MCUME_pico_picodemo_VGA/screenshots/IMG_20230109_195402.jpg)
 
