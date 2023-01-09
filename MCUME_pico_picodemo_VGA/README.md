@@ -15,7 +15,6 @@ Apart from the screen being mostly in RED.  The only other drawback in this vers
 
 A pre-built .uf2 file is included currently within the build folder.  It does require an /800/Alien Ambush.rom file to be on the sdcard.  I'm obviously not distributing any .rom files (for obvious reasons) but you can obtain them easily enough online.
 
-![Shape](https://github.com/pi-gram/pico_c/blob/main/MCUME_pico_picodemo_VGA/screenshots/IMG_20230109_195217.jpg)
 
 To use, open a Terminator window and split horizontally
 [1]
@@ -33,5 +32,5 @@ It will auto disconnect and then reconnect and you will see the DEBUG output in 
 
 I'll add an image or even a video to show it in the current working state shortly and include it below:
 
-![Shape](https://github.com/pi-gram/pico_c/blob/main/MCUME_pico_picodemo_VGA/screenshots/IMG_20230109_195402.jpg)
+![Shape](https://github.com/pi-gram/pico_c/blob/main/MCUME_pico_picodemo_VGA/screenshots/IMG_20230109_195217.jpg)
 
