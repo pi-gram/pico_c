@@ -102,7 +102,10 @@ typedef unsigned char Bool;
 #define PI 3.14159265358979324
 #define PI2 (3.14159265358979324*2)
 
-#define VGA_RGB(r,g,b)   ( (((r>>5)&0x07)<<5) | (((g>>5)&0x07)<<2) | (((b>>6)&0x3)<<0) )
+//will this conflict with the setting wihin VGA_t4.h? also we have different value for VGA_t4.cpp?
+//#define VGA_RGB(r,g,b)   ( (((r>>5)&0x07)<<5) | (((g>>5)&0x07)<<2) | (((b>>6)&0x3)<<0) )
+//let's try this value
+#define VGA_RGB(r,g,b)  ( (((b>>3)&0x1f)<<11) | (((g>>2)&0x3f)<<5) | (((r>>3)&0x1f)<<0) )
 
 
 // system includes

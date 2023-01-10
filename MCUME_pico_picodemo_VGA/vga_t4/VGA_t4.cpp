@@ -28,9 +28,18 @@
 
 #ifdef USE_VGA
 
-#define R16(rgb) ((rgb>>8)&0xf8) 
-#define G16(rgb) ((rgb>>3)&0xfc) 
-#define B16(rgb) ((rgb<<3)&0xf8) 
+//TP - will these values need tweaking too?
+//original 8-bit BBGGGRRR
+//#define R16(rgb) ((rgb>>8)&0xf8) //248
+//#define G16(rgb) ((rgb>>3)&0xfc) //252
+//#define B16(rgb) ((rgb<<3)&0xf8) //248
+
+#define RGBVAL16(r,g,b)  ( (((b>>3)&0x1f)<<11) | (((g>>2)&0x3f)<<5) | (((r>>3)&0x1f)<<0) )
+//let's try the following?!
+#define R16(rgb) ((rgb>>3)&0x1f)
+#define G16(rgb) ((rgb>>2)&0x3f)
+#define B16(rgb) ((rgb>>3)&0x1f)
+
 
 #define PIO_FB_OFFSET 4
 
@@ -58,9 +67,11 @@ static void core1_func();
 
 PolyDef	PolySet;  // will contain a polygon data
 
+//TP - this is where I suspect the definition of the RRRRRGGGGGBBBBB needs to be modified
+//the following only used within writeLine() all else uses VGA_RGB value from header
 #define RGBVAL16(r,g,b)  ( (((b>>3)&0x1f)<<11) | (((g>>2)&0x3f)<<5) | (((r>>3)&0x1f)<<0) )
-#define PICO_SCANVIDEO_PIXEL_FROM_RGBVAL8(rgb) (((rgb&0x3)<<(PICO_SCANVIDEO_PIXEL_BSHIFT))|(((rgb&0x1C)>>2)<<(PICO_SCANVIDEO_PIXEL_GSHIFT))|(((rgb&0xE0)>>5)<<(PICO_SCANVIDEO_PIXEL_RSHIFT)))
 
+//these values above kind of indicate to me that they are already set for the RRRRRGGGGGBBBBB
 
 
 static void core1_sio_irq();

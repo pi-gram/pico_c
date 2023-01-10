@@ -321,7 +321,7 @@ void VgaPioInit()
 	//need to do RED on it's own and then do GREEN+BLUE together
 	printf("VGA.CPP: about to set_cons the pin direction\n");
 	pio_sm_set_consecutive_pindirs(VGA_PIO, VGA_SM0, 0, 5, true);   //0,4
-	pio_sm_set_consecutive_pindirs(VGA_PIO, VGA_SM0, 6, 10, true);  //6,9
+	pio_sm_set_consecutive_pindirs(VGA_PIO, VGA_SM0, 6, 16, true);  //6,15
 	
 	pio_sm_set_consecutive_pindirs(VGA_PIO, VGA_SM0, VGA_GPIO_SYNC, 1, true);
 #if VGA_VSYNC
@@ -336,7 +336,7 @@ void VgaPioInit()
         printf("VGA.CPP: about to sm_config_set_out_pins: %d %d\n", VGA_GPIO_FIRST, VGA_GPIO_OUTNUM);
 //	sm_config_set_out_pins(&cfg, VGA_GPIO_FIRST, VGA_GPIO_OUTNUM);
 	sm_config_set_out_pins(&cfg, 0, 5); //0,4
-	sm_config_set_out_pins(&cfg, 6, 10); //6,9
+	sm_config_set_out_pins(&cfg, 6, 16); //6,15
 
 	// join FIFO to send only
 	sm_config_set_fifo_join(&cfg, PIO_FIFO_JOIN_TX);

@@ -26,8 +26,10 @@
 //#define DEBUG
 
 typedef uint8_t vga_pixel;
-#define VGA_RGB(r,g,b)   ( (((r>>5)&0x07)<<5) | (((g>>5)&0x07)<<2) | (((b>>6)&0x3)<<0) )
-
+//Pretty sure this is where it is limiting the usage of colours to 8-bit BBGGRRR?
+//#define VGA_RGB(r,g,b)   ( (((r>>5)&0x07)<<5) | (((g>>5)&0x07)<<2) | (((b>>6)&0x3)<<0) )
+//let's try this value
+#define VGA_RGB(r,g,b)  ( (((b>>3)&0x1f)<<11) | (((g>>2)&0x3f)<<5) | (((r>>3)&0x1f)<<0) )
 
 typedef enum vga_mode_t
 {
@@ -59,8 +61,8 @@ typedef struct {
 	Point2D		Pts[MaxPolyPoint];	// Points for the polygon
 }PolyDef;
 
-
-#define DEFAULT_VSYNC_PIN 8
+//was 8, changed to 16
+#define DEFAULT_VSYNC_PIN 16 //8
 
 #ifndef ABS
 #define ABS(X)  ((X) > 0 ? (X) : -(X))

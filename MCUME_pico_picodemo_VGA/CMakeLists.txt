@@ -19,8 +19,8 @@ include_directories(./lib/FatFs_SPI)
 include_directories(./lib/sdcard)
 
 include_directories(config)
-include_directories(vga_t4)
-#include_directories(picovga_t4)
+#include_directories(vga_t4) #version used for github repo - works okay (little bit of to the right on the VGA screen) uses scanline
+include_directories(picovga_t4)
 include_directories(tft_t)
 include_directories(psram)
 
@@ -100,8 +100,8 @@ add_executable(mcume
 #		${TESTKEYMAX_SOURCES}
 #		${TESTPSRAM_SOURCES}
 #		${PSRAM_SOURCES}
-		${VGA_T4_SOURCES}
-#		${PICOVGA_T4_SOURCES}
+#		${VGA_T4_SOURCES} #version used on github repo
+		${PICOVGA_T4_SOURCES}
 #		${TFT_T_SOURCES}
 	)
 
@@ -138,7 +138,7 @@ target_link_libraries(mcume PRIVATE
 	pico_stdlib
 	sdcard 
 	FatFs_SPI
-#        pico_scanvideo_dpi
+#        pico_scanvideo_dpi #not needed as VGA_t4 includes the code within it
 	hardware_spi
 	hardware_gpio
 	hardware_pio

@@ -55,7 +55,7 @@
 //
 // GP16... HSYNC
 // GP17... VSYNC
-//#define VGA_GPIO_FIRST  VGABOARD_VGA_COLOR_PIN_BASE //TP added pico demo board values
+#define VGA_GPIO_FIRST  VGABOARD_VGA_COLOR_PIN_BASE //TP added pico demo board values
 #define VGA_GPIO0_R0	0
 #define VGA_GPIO1_R1	1
 #define VGA_GPIO2_R2	2
@@ -78,8 +78,8 @@
 #define VGA_GPIO_NUM	17 //9	// number of VGA GPIOs, including HSYNC and VSYNC
 #define VGA_GPIO_OUTNUM	15 //8	// number of VGA color GPIOs, without HSYNC and VSYNC
 #define VGA_GPIO_LAST	(VGA_GPIO_FIRST+VGA_GPIO_NUM-1)	// last VGA GPIO
-//#define VGA_GPIO_SYNC	VGABOARD_VGA_SYNC_PIN_BASE //TP added pico demo board values
-#define VGA_GPIO_SYNC	VGA_SYNCBASE	// VGA SYNC GPIO
+#define VGA_GPIO_SYNC	VGABOARD_VGA_SYNC_PIN_BASE //TP added pico demo board values
+//#define VGA_GPIO_SYNC	VGA_SYNCBASE	// VGA SYNC GPIO
 
 // === VGA PIO program
 #define BASE_OFFSET	17	// offset of base layer program

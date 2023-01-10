@@ -26,7 +26,31 @@
 //#define DEBUG
 
 typedef uint8_t vga_pixel;
+//TP - this is where I suspect the definition of the RRRRRGGGGGBBBBB needs to be modified
 #define VGA_RGB(r,g,b)   ( (((r>>5)&0x07)<<5) | (((g>>5)&0x07)<<2) | (((b>>6)&0x3)<<0) )
+//BBGGGRRR
+//01234567  B=0/1 G=2/3/4 R=5/6/7
+
+//let's experiment!
+/*
+//following came from other code
+#ifndef PICO_SCANVIDEO_DPI_PIXEL_RSHIFT
+#define PICO_SCANVIDEO_DPI_PIXEL_RSHIFT 0u //Hex= 0000
+#endif
+
+#ifndef PICO_SCANVIDEO_DPI_PIXEL_GSHIFT
+#define PICO_SCANVIDEO_DPI_PIXEL_GSHIFT 6u //Hex = 0006
+#endif
+
+#ifndef PICO_SCANVIDEO_DPI_PIXEL_BSHIFT
+#define PICO_SCANVIDEO_DPI_PIXEL_BSHIFT 11u //Hex = 000b
+#endif
+
+#define VGA_RGB(r,g,b)   ( (((r)>>3u)<<PICO_SCANVIDEO_DPI_PIXEL_RSHIFT) | (((g)>>3u)<<PICO_SCANVIDEO_DPI_PIXEL_GSHIFT) | (((b)>>3u)<<PICO_SCANVIDEO_DPI_PIXEL_BSHIFT) )
+*/
+//RRRRRGGGGGBBBBB
+//#define VGA_RGB(r,g,b)   ( (((b)>>3u)<<11u) | (((g)>>3u)<<6u) | (((r)>>3u)<<0u) )
+//just fumbling in the dark there - absolutely no idea what I was attempting to do
 
 
 typedef enum vga_mode_t
